@@ -87,10 +87,6 @@ class SaveDatabase extends Command
             ]);
 
             $count++;
-
-            if ($count >= 10) {
-                break;
-            }
         }
 
         $this->info("$count registros");
