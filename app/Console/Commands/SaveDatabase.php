@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Episode;
 use App\Title;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
@@ -43,10 +44,14 @@ class SaveDatabase extends Command
     public function handle()
     {
         Title::unguard();
+        Episode::unguard();
 
         $this->titleToDatabase();
+        $this->episodeToDatabase();
 
         Title::reguard();
+        Episode::reguard();
+
         return 0;
     }
 
@@ -94,6 +99,39 @@ class SaveDatabase extends Command
         Storage::disk(config('imdb.disk'))->delete($tmp);
     }
 
+    private function episodeToDatabase()
+    {
+        $this->info('title.episode');
+
+        $first = true;
+        $count = 0;
+
+        foreach ($this->yieldTsv('unzip/title.episode.tsv') as $tsv) {
+            if($first) {
+                $first = false;
+                continue;
+            }
+
+            $title = str_replace('tt', '', $tsv[0]);
+            $parent = str_replace('tt', '', $tsv[1]);
+
+            Episode::create([
+                'title_id' => intval($title),
+                'parent_id' => intval($parent),
+                'seasonNumber' => $tsv[2] == '\\N' ? null : $tsv[2],
+                'episodeNumber' => $tsv[3] == '\\N' ? null : $tsv[3],
+            ]);
+
+            $count++;
+        }
+
+        $this->info("$count registros");
+    }
+
+    /**
+     * @param $file
+     * @return \Generator
+     */
     private function yieldTsv($file)
     {
         $path = Storage::disk(config('imdb.disk'))->path($file);
