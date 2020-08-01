@@ -38,14 +38,9 @@ class DownloadDatabase extends Command
      */
     public function handle()
     {
-        $url = 'https://datasets.imdbws.com/';
-        $files = [
-            'title.basics.tsv.gz',
-            'title.episode.tsv.gz',
-            'title.ratings.tsv.gz',
-        ];
+        $url = config('imdb.url');
 
-        foreach ($files as $file) {
+        foreach (config('imdb.files') as $file) {
             $this->info("Downloading $file ...");
 
             try {
