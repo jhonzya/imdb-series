@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class SaveDatabase extends Command
 {
@@ -77,8 +78,8 @@ class SaveDatabase extends Command
 
             Title::create([
                 'id' => intval($id),
-                'primaryTitle' => $tsv[2],
-                'originalTitle' => $tsv[3],
+                'primaryTitle' => Str::limit($tsv[2], 252),
+                'originalTitle' => Str::limit($tsv[3], 252),
                 'isAdult' => boolval($tsv[4]),
                 'startYear' => $tsv[5],
                 'endYear' => $tsv[6] == '\\N' ? null : $tsv[6],
@@ -87,6 +88,7 @@ class SaveDatabase extends Command
             ]);
 
             $count++;
+            break;
         }
 
         $this->info("$count registros");
