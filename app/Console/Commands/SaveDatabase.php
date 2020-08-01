@@ -88,7 +88,6 @@ class SaveDatabase extends Command
             ]);
 
             $count++;
-            break;
         }
 
         $this->info("$count registros");
