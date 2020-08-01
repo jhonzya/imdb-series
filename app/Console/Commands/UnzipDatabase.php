@@ -38,7 +38,7 @@ class UnzipDatabase extends Command
      */
     public function handle()
     {
-        Storage::disk('imdb')->makeDirectory('unzip');
+        Storage::disk(config('imdb.disk'))->makeDirectory('unzip');
 
         foreach (config('imdb.files') as $file) {
             $this->info("Unzip $file ...");
@@ -46,8 +46,8 @@ class UnzipDatabase extends Command
             $unzip = str_replace('.gz', '', $file);
             $buffer = 4096;
 
-            $path = Storage::disk('imdb')->path($file);
-            $outPath = Storage::disk('imdb')->path("unzip/$unzip");
+            $path = Storage::disk(config('imdb.disk'))->path($file);
+            $outPath = Storage::disk(config('imdb.disk'))->path("unzip/$unzip");
 
             $file = gzopen($path, 'rb');
             $outFile = fopen($outPath, 'wb');

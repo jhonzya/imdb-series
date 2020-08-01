@@ -44,7 +44,7 @@ class DownloadDatabase extends Command
             $this->info("Downloading $file ...");
 
             try {
-                Storage::disk('imdb')->put($file, fopen($url.$file, 'r'));
+                Storage::disk(config('imdb.disk'))->put($file, fopen($url.$file, 'r'));
             } catch (\Throwable $e) {
                 $this->error($e->getMessage());
             }
