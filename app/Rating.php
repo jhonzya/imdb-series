@@ -8,4 +8,6 @@ class Rating extends Model
 {
     public $incrementing = false;
     public $timestamps = false;
+
+    public $hidden = ['id'];
 }
