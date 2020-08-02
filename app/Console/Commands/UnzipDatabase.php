@@ -52,7 +52,7 @@ class UnzipDatabase extends Command
             $file = gzopen($path, 'rb');
             $outFile = fopen($outPath, 'wb');
 
-            while (!gzeof($file)) {
+            while (! gzeof($file)) {
                 fwrite($outFile, gzread($file, $buffer));
             }
 
