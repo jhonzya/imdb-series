@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $title = \App\Title::inRandomOrder()->first();
+    return view('welcome')->with(compact('title'));
 });
+
+Route::get('/tt{title}', function (\App\Title $title) {
+    return view('series')->with(compact('title'));
+})->name('series');
