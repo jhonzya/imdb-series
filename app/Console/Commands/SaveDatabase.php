@@ -14,7 +14,7 @@ class SaveDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'imdb:save {--T|title} {--E|episode}';
+    protected $signature = 'imdb:save {--T|title} {--E|episode} {--R|rating}';
 
     /**
      * The console command description.
@@ -40,17 +40,30 @@ class SaveDatabase extends Command
      */
     public function handle()
     {
-        $this->titleToDatabase();
-        $this->episodeToDatabase();
-        $this->ratingToDatabase();
+        $all = ! $this->option('title')
+            && ! $this->option('episode')
+            && ! $this->option('rating');
+
+        if( $all || $this->option('title') ) {
+            $this->info('title');
+            $this->titleToDatabase();
+        }
+
+        if( $all || $this->option('episode') ) {
+            $this->info('episode');
+            $this->episodeToDatabase();
+        }
+
+        if( $all || $this->option('rating') ) {
+            $this->info('rating');
+            $this->ratingToDatabase();
+        }
 
         return 0;
     }
 
     private function titleToDatabase()
     {
-        $this->info('title.basics');
-
         $tmp = 'unzip/tmp.tsv';
         $path = Storage::disk(config('imdb.disk'))->path('unzip/title.basics.tsv');
         $out = Storage::disk(config('imdb.disk'))->path($tmp);
@@ -92,8 +105,6 @@ class SaveDatabase extends Command
 
     private function episodeToDatabase()
     {
-        $this->info('title.episode');
-
         $database = config('database.connections.mysql.database');
         $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.episode.tsv');
 
@@ -121,8 +132,6 @@ class SaveDatabase extends Command
 
     private function ratingToDatabase()
     {
-        $this->info('title.ratings');
-
         $database = config('database.connections.mysql.database');
         $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.ratings.tsv');
 
