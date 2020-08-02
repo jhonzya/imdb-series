@@ -44,17 +44,17 @@ class SaveDatabase extends Command
             && ! $this->option('episode')
             && ! $this->option('rating');
 
-        if( $all || $this->option('title') ) {
+        if ($all || $this->option('title')) {
             $this->info('title');
             $this->titleToDatabase();
         }
 
-        if( $all || $this->option('episode') ) {
+        if ($all || $this->option('episode')) {
             $this->info('episode');
             $this->episodeToDatabase();
         }
 
-        if( $all || $this->option('rating') ) {
+        if ($all || $this->option('rating')) {
             $this->info('rating');
             $this->ratingToDatabase();
         }
@@ -68,7 +68,7 @@ class SaveDatabase extends Command
         $path = Storage::disk(config('imdb.disk'))->path('unzip/title.basics.tsv');
         $out = Storage::disk(config('imdb.disk'))->path($tmp);
 
-        if( ! Storage::disk(config('imdb.disk'))->exists($tmp) ) {
+        if (! Storage::disk(config('imdb.disk'))->exists($tmp)) {
             $this->line('awk...');
 
             $awk = 'awk \'/tvSeries/ || /tvEpisode/\' '.$path.' > '.$out;
