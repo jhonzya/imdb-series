@@ -14,10 +14,10 @@ class CreateEpisodesTable extends Migration
     public function up()
     {
         Schema::create('episodes', function (Blueprint $table) {
-            $table->unsignedMediumInteger('title_id')->index();
+            $table->unsignedMediumInteger('title_id');
             $table->unsignedMediumInteger('parent_id')->index();
             $table->smallInteger('seasonNumber')->nullable();
-            $table->smallInteger('episodeNumber')->nullable();
+            $table->mediumInteger('episodeNumber')->nullable();
 
             $table->unique(['title_id', 'parent_id']);
         });

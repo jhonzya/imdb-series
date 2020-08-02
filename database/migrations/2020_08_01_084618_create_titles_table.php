@@ -18,7 +18,7 @@ class CreateTitlesTable extends Migration
             $table->string('primaryTitle');
             $table->string('originalTitle');
             $table->boolean('isAdult')->default(false);
-            $table->smallInteger('startYear');
+            $table->smallInteger('startYear')->nullable();
             $table->smallInteger('endYear')->nullable();
             $table->smallInteger('runtimeMinutes')->nullable();
 

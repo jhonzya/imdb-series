@@ -2,13 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Episode;
-use App\Title;
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 class SaveDatabase extends Command
 {
@@ -17,7 +14,7 @@ class SaveDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'imdb:save';
+    protected $signature = 'imdb:save {--T|title} {--E|episode}';
 
     /**
      * The console command description.
@@ -43,14 +40,9 @@ class SaveDatabase extends Command
      */
     public function handle()
     {
-        Title::unguard();
-        Episode::unguard();
-
         $this->titleToDatabase();
         $this->episodeToDatabase();
-
-        Title::reguard();
-        Episode::reguard();
+        $this->ratingToDatabase();
 
         return 0;
     }
@@ -63,84 +55,93 @@ class SaveDatabase extends Command
         $path = Storage::disk(config('imdb.disk'))->path('unzip/title.basics.tsv');
         $out = Storage::disk(config('imdb.disk'))->path($tmp);
 
-        $awk = 'awk \'/tvSeries/ || /tvEpisode/\' '.$path.' > '.$out;
-        exec($awk);
+        if( ! Storage::disk(config('imdb.disk'))->exists($tmp) ) {
+            $this->line('awk...');
 
-        $count = 0;
-        $min = config('imdb.minYear');
-        $types = [
-            'tvSeries' => Cache::get('tvSeries'),
-            'tvEpisode' => Cache::get('tvEpisode'),
-        ];
-
-        foreach ($this->yieldTsv($tmp) as $tsv) {
-            $startYear = $tsv[5];
-            if ($startYear < $min) {
-                continue;
-            }
-
-            $id = str_replace('tt', '', $tsv[0]);
-
-            Title::create([
-                'id' => intval($id),
-                'primaryTitle' => Str::limit($tsv[2], 252),
-                'originalTitle' => Str::limit($tsv[3], 252),
-                'isAdult' => boolval($tsv[4]),
-                'startYear' => $tsv[5],
-                'endYear' => $tsv[6] == '\\N' ? null : $tsv[6],
-                'runtimeMinutes' => $tsv[7] == '\\N' ? null : $tsv[7],
-                'type_id' => $types[$tsv[1]],
-            ]);
-
-            $count++;
+            $awk = 'awk \'/tvSeries/ || /tvEpisode/\' '.$path.' > '.$out;
+            exec($awk);
         }
 
-        $this->info("$count registros");
-        Storage::disk(config('imdb.disk'))->delete($tmp);
+        $database = config('database.connections.mysql.database');
+        $tvSeries = Cache::get('tvSeries');
+        $tvEpisode = Cache::get('tvEpisode');
+
+        $sql = "LOAD DATA INFILE '$out'
+            REPLACE INTO TABLE $database.titles
+            FIELDS TERMINATED BY '\t'
+            LINES TERMINATED BY '\n'
+            (@id,@type_id,@primaryTitle,@originalTitle,isAdult,startYear,@endYear,@runtimeMinutes,@dummy)
+            SET id = CAST(REPLACE(@id,'tt','') AS UNSIGNED),
+                type_id = IF(STRCMP(@type_id,'tvSeries') = 0, $tvSeries, $tvEpisode),
+                primaryTitle = LEFT(@primaryTitle, 255),
+                originalTitle = LEFT(@originalTitle, 255),
+                endYear = IF(STRCMP(@endYear,'\\N') = 0, NULL, @endYear),
+                runtimeMinutes = IF(STRCMP(@runtimeMinutes,'\\N') = 0, NULL, @runtimeMinutes);";
+
+        try {
+            $this->line('database...');
+
+            DB::connection()->getPdo()->exec($sql);
+            Storage::disk(config('imdb.disk'))->delete($tmp);
+        } catch (\Throwable $e) {
+            $this->error($e->getMessage());
+        }
+
+        $this->line('finish');
     }
 
     private function episodeToDatabase()
     {
         $this->info('title.episode');
 
-        $first = true;
-        $count = 0;
+        $database = config('database.connections.mysql.database');
+        $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.episode.tsv');
 
-        foreach ($this->yieldTsv('unzip/title.episode.tsv') as $tsv) {
-            if($first) {
-                $first = false;
-                continue;
-            }
+        $sql = "LOAD DATA INFILE '$episode'
+            REPLACE INTO TABLE $database.episodes
+            FIELDS TERMINATED BY '\t'
+            LINES TERMINATED BY '\n'
+            IGNORE 1 LINES
+            (@title_id,@parent_id,@seasonNumber,@episodeNumber)
+            SET title_id = CAST(REPLACE(@title_id,'tt','') AS UNSIGNED),
+                parent_id = CAST(REPLACE(@parent_id,'tt','') AS UNSIGNED),
+                seasonNumber = IF(STRCMP(@seasonNumber,'\\N') = 0, NULL, @seasonNumber),
+                episodeNumber = IF(STRCMP(@episodeNumber,'\\N') = 0, NULL, @episodeNumber);";
 
-            $title = str_replace('tt', '', $tsv[0]);
-            $parent = str_replace('tt', '', $tsv[1]);
+        try {
+            $this->line('database...');
 
-            Episode::create([
-                'title_id' => intval($title),
-                'parent_id' => intval($parent),
-                'seasonNumber' => $tsv[2] == '\\N' ? null : $tsv[2],
-                'episodeNumber' => $tsv[3] == '\\N' ? null : $tsv[3],
-            ]);
-
-            $count++;
+            DB::connection()->getPdo()->exec($sql);
+        } catch (\Throwable $e) {
+            $this->error($e->getMessage());
         }
 
-        $this->info("$count registros");
+        $this->line('finish');
     }
 
-    /**
-     * @param $file
-     * @return \Generator
-     */
-    private function yieldTsv($file)
+    private function ratingToDatabase()
     {
-        $path = Storage::disk(config('imdb.disk'))->path($file);
-        $fileManager = fopen($path, 'r');
+        $this->info('title.ratings');
 
-        while (($data = fgetcsv($fileManager, 0, "\t")) !== false) {
-            yield $data;
+        $database = config('database.connections.mysql.database');
+        $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.ratings.tsv');
+
+        $sql = "LOAD DATA INFILE '$episode'
+            REPLACE INTO TABLE $database.ratings
+            FIELDS TERMINATED BY '\t'
+            LINES TERMINATED BY '\n'
+            IGNORE 1 LINES
+            (@id,averageRating,numVotes)
+            SET id = CAST(REPLACE(@id,'tt','') AS UNSIGNED);";
+
+        try {
+            $this->line('database...');
+
+            DB::connection()->getPdo()->exec($sql);
+        } catch (\Throwable $e) {
+            $this->error($e->getMessage());
         }
 
-        fclose($fileManager);
+        $this->line('finish');
     }
 }
