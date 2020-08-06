@@ -1,13 +1,10 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Hello world</div>
-                </div>
-            </div>
+    <section class="flex items-center justify-center h-screen p-8 bg-orange-100">
+        <div class="container">
+            <input class="w-full h-16 rounded focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg"
+                type="search" placeholder="Search...">
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
