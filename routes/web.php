@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $title = \App\Title::inRandomOrder()->first();
-    return view('welcome')->with(compact('title'));
+    return view('index');
 });
 
 Route::get('/tt{title}', function (\App\Title $title) {
