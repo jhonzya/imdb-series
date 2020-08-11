@@ -2620,6 +2620,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EpisodesComponent",
   props: {
@@ -2635,6 +2645,11 @@ __webpack_require__.r(__webpack_exports__);
         episodes: []
       }
     };
+  },
+  computed: {
+    groupBySeason: function groupBySeason() {
+      return _.groupBy(this.title.episodes, 'seasonNumber');
+    }
   },
   created: function created() {
     var _this = this;
@@ -20387,7 +20402,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    " + _vm._s(_vm.title) + "\n")])
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "grid grid-flow-col grid-cols-5 gap-4" },
+      _vm._l(_vm.groupBySeason, function(season, index) {
+        return _c("div", { key: index }, [
+          _c(
+            "div",
+            { staticClass: "text-center" },
+            _vm._l(season, function(episode) {
+              return _c(
+                "div",
+                {
+                  key: episode.seasonNumber + episode.episodeNumber,
+                  staticClass: "bg-gray-400 my-2"
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(episode.episodeNumber) +
+                      "\n                "
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
