@@ -60,6 +60,10 @@
                     <div class="mt-0 mb-4 text-gray-600">
                         <a href="{{ $title->link }}" class="underline" target="_blank">Ver en IMDb</a>
                     </div>
+
+                    <div class="mt-0 mb-4">
+                        <episodes-component api="{{ $title->api }}"></episodes-component>
+                    </div>
                 </div>
             </div>
         </div>
