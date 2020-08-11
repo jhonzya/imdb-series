@@ -9,4 +9,5 @@ return [
     ],
     'minYear' => 1990,
     'url' => 'https://datasets.imdbws.com/',
+    'website' => 'https://www.imdb.com/',
 ];

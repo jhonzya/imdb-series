@@ -9,10 +9,19 @@ class Title extends Model
 {
     public $incrementing = false;
     public $timestamps = false;
+    protected $appends = ['link'];
 
     protected static function booted()
     {
         static::addGlobalScope(new SeriesScope());
+    }
+
+    public function getLinkAttribute()
+    {
+        $id = str_pad($this->attributes['id'], 7, '0', STR_PAD_LEFT);
+        $website = config('imdb.website');
+
+        return $website.'title/tt'.$id;
     }
 
     // relationships
