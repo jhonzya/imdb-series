@@ -2675,7 +2675,7 @@ var wikiUrl = 'https://es.wikipedia.org';
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (data) {
-          resolve(data);
+          resolve(data.data);
         });
       });
     },
@@ -2683,7 +2683,7 @@ var wikiUrl = 'https://es.wikipedia.org';
       return result.primaryTitle;
     },
     onSubmit: function onSubmit(result) {
-      window.open("/tt".concat(encodeURI(result.id)), '_self');
+      window.open(result.profile, '_self');
     }
   }
 });

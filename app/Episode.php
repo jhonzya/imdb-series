@@ -18,4 +18,9 @@ class Episode extends Model
             ->withoutGlobalScope(SeriesScope::class)
             ->with('rating');
     }
+
+    public function rating()
+    {
+        return $this->hasOne('App\Rating', 'id', 'title_id');
+    }
 }

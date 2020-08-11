@@ -14,11 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('search', function (Request $request) {
-    return \App\Title::where('primaryTitle', 'like', '%'.$request->get('q').'%')
-        ->limit(10)->get();
-})->name('search');
+Route::get('/title/search', 'TitleController@search')->name('search');
+Route::get('/title/{title}/show', 'TitleController@show')->name('show');

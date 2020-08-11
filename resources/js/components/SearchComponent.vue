@@ -33,7 +33,7 @@
                     fetch(url)
                         .then((response) => response.json())
                         .then((data) => {
-                            resolve(data)
+                            resolve(data.data)
                         })
                 })
             },
@@ -43,7 +43,7 @@
             },
 
             onSubmit(result) {
-                window.open(`/tt${encodeURI(result.id)}`, '_self');
+                window.open(result.profile, '_self');
             },
         },
     }

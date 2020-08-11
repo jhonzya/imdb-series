@@ -9,11 +9,16 @@ class Title extends Model
 {
     public $incrementing = false;
     public $timestamps = false;
-    protected $appends = ['link'];
+    protected $appends = ['link', 'api'];
 
     protected static function booted()
     {
         static::addGlobalScope(new SeriesScope());
+    }
+
+    public function getApiAttribute()
+    {
+        return route('show', ['title' => $this->attributes['id']]);
     }
 
     public function getLinkAttribute()
