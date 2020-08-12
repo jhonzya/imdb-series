@@ -15948,6 +15948,26 @@ video {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
+.grid-cols-13{
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+}
+
+.grid-cols-14{
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+}
+
+.grid-cols-15{
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+}
+
+.grid-cols-16{
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+.grid-cols-32{
+  grid-template-columns: repeat(32, minmax(0, 1fr));
+}
+
 .grid-cols-none{
   grid-template-columns: none;
 }
@@ -33392,6 +33412,26 @@ video {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
+  .sm\:grid-cols-13{
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-14{
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-15{
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-16{
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-32{
+    grid-template-columns: repeat(32, minmax(0, 1fr));
+  }
+
   .sm\:grid-cols-none{
     grid-template-columns: none;
   }
@@ -50743,6 +50783,26 @@ video {
 
   .md\:grid-cols-12{
     grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-13{
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-14{
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-15{
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-16{
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-32{
+    grid-template-columns: repeat(32, minmax(0, 1fr));
   }
 
   .md\:grid-cols-none{
@@ -68098,6 +68158,26 @@ video {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
+  .lg\:grid-cols-13{
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-14{
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-15{
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-16{
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-32{
+    grid-template-columns: repeat(32, minmax(0, 1fr));
+  }
+
   .lg\:grid-cols-none{
     grid-template-columns: none;
   }
@@ -85449,6 +85529,26 @@ video {
 
   .xl\:grid-cols-12{
     grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-13{
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-14{
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-15{
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-16{
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-32{
+    grid-template-columns: repeat(32, minmax(0, 1fr));
   }
 
   .xl\:grid-cols-none{

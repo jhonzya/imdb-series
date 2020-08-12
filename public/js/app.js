@@ -2630,6 +2630,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EpisodesComponent",
   props: {
@@ -2649,6 +2650,16 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     groupBySeason: function groupBySeason() {
       return _.groupBy(this.title.episodes, 'seasonNumber');
+    },
+    grid: function grid() {
+      var keys = _.keys(this.groupBySeason).map(function (val) {
+        return parseInt(val);
+      }).filter(function (val) {
+        return val > 0;
+      });
+
+      var max = Math.max.apply(null, keys);
+      return ['grid grid-flow-col', "grid-cols-".concat(max)];
     }
   },
   created: function created() {
@@ -2659,6 +2670,30 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (e) {
       console.error(e);
     });
+  },
+  methods: {
+    getEpisodeClass: function getEpisodeClass(rating) {
+      var number = parseFloat(rating ? rating.averageRating : null);
+      var color = 'gray-300';
+      var opacity = 300;
+
+      if (number >= 10) {
+        color = 'blue';
+      } else if (number >= 9) {
+        color = 'green';
+      } else if (number >= 8) {
+        color = 'yellow';
+      } else if (number >= 7) {
+        color = 'orange';
+      } else if (number >= 6) {
+        color = 'pink';
+      } else if (number > 0) {
+        color = 'red';
+        opacity = 400;
+      }
+
+      return ['select-none', 'cursor-pointer', "bg-".concat(color, "-").concat(opacity), "hover:bg-".concat(color, "-").concat(opacity + 200), 'border border-white rounded'];
+    }
   }
 });
 
@@ -20405,29 +20440,38 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
-      { staticClass: "grid grid-flow-col grid-cols-5 gap-4" },
+      { class: _vm.grid },
       _vm._l(_vm.groupBySeason, function(season, index) {
         return _c("div", { key: index }, [
           _c(
             "div",
             { staticClass: "text-center" },
-            _vm._l(season, function(episode) {
-              return _c(
-                "div",
-                {
-                  key: episode.seasonNumber + episode.episodeNumber,
-                  staticClass: "bg-gray-400 my-2"
-                },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(episode.episodeNumber) +
-                      "\n                "
-                  )
-                ]
-              )
-            }),
-            0
+            [
+              _c("div", [_vm._v("T" + _vm._s(index))]),
+              _vm._v(" "),
+              _vm._l(season, function(episode) {
+                return _c(
+                  "div",
+                  {
+                    key: episode.seasonNumber + episode.episodeNumber,
+                    class: _vm.getEpisodeClass(episode.rating),
+                    attrs: {
+                      title: episode.rating
+                        ? episode.rating.averageRating
+                        : null
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(episode.episodeNumber) +
+                        "\n                "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
           )
         ])
       }),
