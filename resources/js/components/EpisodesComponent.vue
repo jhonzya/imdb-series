@@ -2,9 +2,9 @@
     <div>
         <div :class="grid">
             <div v-for="(season, index) in groupBySeason" :key="index">
-                <div class="text-center">
-                    <div>T{{ index }}</div>
-                    <div v-for="episode in season" :title="episode.rating ? episode.rating.averageRating : null"
+                <div class="text-center mb-4">
+                    <div class="bg-gray-700 border border-white text-white select-none">T{{ index }}</div>
+                    <div v-for="episode in season"
                          :key="episode.seasonNumber + episode.episodeNumber"
                          :class="getEpisodeClass(episode.rating)">
                         {{ episode.episodeNumber }}
@@ -42,9 +42,32 @@ export default {
                 .map(val => parseInt(val))
                 .filter(val => val > 0);
 
-            const max = Math.max.apply(null, keys);
+            let sm, md, lg, max;
+            sm = md = lg = max = Math.max.apply(null, keys);
 
-            return ['grid grid-flow-col', `grid-cols-${max}`];
+            if(max > 12) {
+                sm = 12;
+            }
+
+            if(max > 16) {
+                md = 16;
+            }
+
+            if(max > 24) {
+                lg = 24;
+            }
+
+            if(max > 32) {
+                max = 32;
+            }
+
+            return [
+                'grid',
+                `grid-cols-${sm}`,
+                `md:grid-cols-${md}`,
+                `lg:grid-cols-${lg}`,
+                `xl:grid-cols-${max}`,
+            ];
         },
     },
 

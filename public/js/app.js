@@ -2658,8 +2658,26 @@ __webpack_require__.r(__webpack_exports__);
         return val > 0;
       });
 
-      var max = Math.max.apply(null, keys);
-      return ['grid grid-flow-col', "grid-cols-".concat(max)];
+      var sm, md, lg, max;
+      sm = md = lg = max = Math.max.apply(null, keys);
+
+      if (max > 12) {
+        sm = 12;
+      }
+
+      if (max > 16) {
+        md = 16;
+      }
+
+      if (max > 24) {
+        lg = 24;
+      }
+
+      if (max > 32) {
+        max = 32;
+      }
+
+      return ['grid', "grid-cols-".concat(sm), "md:grid-cols-".concat(md), "lg:grid-cols-".concat(lg), "xl:grid-cols-".concat(max)];
     }
   },
   created: function created() {
@@ -20445,21 +20463,23 @@ var render = function() {
         return _c("div", { key: index }, [
           _c(
             "div",
-            { staticClass: "text-center" },
+            { staticClass: "text-center mb-4" },
             [
-              _c("div", [_vm._v("T" + _vm._s(index))]),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "bg-gray-700 border border-white text-white select-none"
+                },
+                [_vm._v("T" + _vm._s(index))]
+              ),
               _vm._v(" "),
               _vm._l(season, function(episode) {
                 return _c(
                   "div",
                   {
                     key: episode.seasonNumber + episode.episodeNumber,
-                    class: _vm.getEpisodeClass(episode.rating),
-                    attrs: {
-                      title: episode.rating
-                        ? episode.rating.averageRating
-                        : null
-                    }
+                    class: _vm.getEpisodeClass(episode.rating)
                   },
                   [
                     _vm._v(
