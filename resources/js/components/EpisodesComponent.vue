@@ -82,7 +82,7 @@ export default {
     methods: {
         getEpisodeClass(rating) {
             const number = parseFloat(rating ? rating.averageRating : null);
-            let color = 'gray-300';
+            let color = 'gray';
             let opacity = 300;
 
             if(number >= 10) {

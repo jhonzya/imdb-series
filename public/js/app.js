@@ -2692,7 +2692,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getEpisodeClass: function getEpisodeClass(rating) {
       var number = parseFloat(rating ? rating.averageRating : null);
-      var color = 'gray-300';
+      var color = 'gray';
       var opacity = 300;
 
       if (number >= 10) {
