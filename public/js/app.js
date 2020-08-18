@@ -2614,6 +2614,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _widgets_TableWidget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../widgets/TableWidget */ "./resources/js/widgets/TableWidget.vue");
 //
 //
 //
@@ -2624,15 +2625,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EpisodesComponent",
+  components: {
+    TableWidget: _widgets_TableWidget__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: {
     api: {
       type: String,
@@ -2648,36 +2646,34 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    groupBySeason: function groupBySeason() {
-      return _.groupBy(this.title.episodes, 'seasonNumber');
+    episodes: function episodes() {
+      return _.filter(this.title.episodes, function (val) {
+        return val.episodeNumber && val.seasonNumber;
+      });
     },
-    grid: function grid() {
+    groupBySeason: function groupBySeason() {
+      return _.groupBy(this.episodes, 'seasonNumber');
+    },
+    groupByEpisode: function groupByEpisode() {
+      return _.groupBy(this.episodes, 'episodeNumber');
+    },
+    maxEpisodeNumber: function maxEpisodeNumber() {
+      var keys = _.keys(this.groupByEpisode).map(function (val) {
+        return parseInt(val);
+      }).filter(function (val) {
+        return val > 0;
+      });
+
+      return Math.max.apply(null, keys);
+    },
+    maxSeasonNumber: function maxSeasonNumber() {
       var keys = _.keys(this.groupBySeason).map(function (val) {
         return parseInt(val);
       }).filter(function (val) {
         return val > 0;
       });
 
-      var sm, md, lg, max;
-      sm = md = lg = max = Math.max.apply(null, keys);
-
-      if (max > 12) {
-        sm = 12;
-      }
-
-      if (max > 16) {
-        md = 16;
-      }
-
-      if (max > 24) {
-        lg = 24;
-      }
-
-      if (max > 32) {
-        max = 32;
-      }
-
-      return ['grid', "grid-cols-".concat(sm), "md:grid-cols-".concat(md), "lg:grid-cols-".concat(lg), "xl:grid-cols-".concat(max)];
+      return Math.max.apply(null, keys);
     }
   },
   created: function created() {
@@ -2688,30 +2684,6 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (e) {
       console.error(e);
     });
-  },
-  methods: {
-    getEpisodeClass: function getEpisodeClass(rating) {
-      var number = parseFloat(rating ? rating.averageRating : null);
-      var color = 'gray';
-      var opacity = 300;
-
-      if (number >= 10) {
-        color = 'blue';
-      } else if (number >= 9) {
-        color = 'green';
-      } else if (number >= 8) {
-        color = 'yellow';
-      } else if (number >= 7) {
-        color = 'orange';
-      } else if (number >= 6) {
-        color = 'pink';
-      } else if (number > 0) {
-        color = 'red';
-        opacity = 400;
-      }
-
-      return ['select-none', 'cursor-pointer', "bg-".concat(color, "-").concat(opacity), "hover:bg-".concat(color, "-").concat(opacity + 200), 'border border-white rounded'];
-    }
   }
 });
 
@@ -2801,6 +2773,106 @@ var wikiUrl = 'https://es.wikipedia.org';
     },
     onSubmit: function onSubmit(result) {
       window.open(result.profile, '_self');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/widgets/TableWidget.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/widgets/TableWidget.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TableWidget",
+  props: {
+    episodesBySeason: {
+      type: Object,
+      required: true
+    },
+    maxEpisodeNumber: {
+      type: Number,
+      required: true
+    },
+    maxSeasonNumber: {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    grid: function grid() {
+      var sm, md, lg, max;
+      sm = md = lg = max = this.maxSeasonNumber + 1;
+
+      if (max > 12) {
+        sm = 12;
+      }
+
+      if (max > 16) {
+        md = 16;
+      }
+
+      if (max > 24) {
+        lg = 24;
+      }
+
+      if (max > 32) {
+        max = 32;
+      }
+
+      return ['grid', "grid-cols-".concat(sm), "md:grid-cols-".concat(md), "lg:grid-cols-".concat(lg), "xl:grid-cols-".concat(max)];
+    }
+  },
+  methods: {
+    getEpisodeClass: function getEpisodeClass(rating) {
+      var number = parseFloat(rating ? rating.averageRating : null);
+      var color = 'gray';
+      var opacity = 300;
+
+      if (number >= 10) {
+        color = 'blue';
+      } else if (number >= 9) {
+        color = 'green';
+      } else if (number >= 8) {
+        color = 'yellow';
+      } else if (number >= 7) {
+        color = 'orange';
+      } else if (number >= 6) {
+        color = 'pink';
+      } else if (number > 0) {
+        color = 'red';
+        opacity = 400;
+      }
+
+      return ['select-none', 'cursor-pointer', "bg-".concat(color, "-").concat(opacity), "hover:bg-".concat(color, "-").concat(opacity + 200), 'border border-white rounded'];
     }
   }
 });
@@ -20455,49 +20527,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { class: _vm.grid },
-      _vm._l(_vm.groupBySeason, function(season, index) {
-        return _c("div", { key: index }, [
-          _c(
-            "div",
-            { staticClass: "text-center mb-4" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "bg-gray-700 border border-white text-white select-none"
-                },
-                [_vm._v("T" + _vm._s(index))]
-              ),
-              _vm._v(" "),
-              _vm._l(season, function(episode) {
-                return _c(
-                  "div",
-                  {
-                    key: episode.seasonNumber + episode.episodeNumber,
-                    class: _vm.getEpisodeClass(episode.rating)
-                  },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(episode.episodeNumber) +
-                        "\n                "
-                    )
-                  ]
-                )
-              })
-            ],
-            2
-          )
-        ])
-      }),
-      0
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _vm.episodes.length > 0
+        ? _c("TableWidget", {
+            attrs: {
+              "max-season-number": _vm.maxSeasonNumber,
+              "max-episode-number": _vm.maxEpisodeNumber,
+              "episodes-by-season": _vm.groupBySeason
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -20577,6 +20621,108 @@ var render = function() {
     },
     on: { submit: _vm.onSubmit }
   })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/widgets/TableWidget.vue?vue&type=template&id=60fbca24&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/widgets/TableWidget.vue?vue&type=template&id=60fbca24& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { class: _vm.grid },
+    [
+      _c("div", [
+        _c(
+          "div",
+          { staticClass: "text-center mb-4" },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "bg-gray-700 border border-white text-gray-700 select-none"
+              },
+              [_vm._v("S/T")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.maxEpisodeNumber, function(index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass:
+                    "bg-gray-700 border border-white text-white select-none"
+                },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(index) + "\n            "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.episodesBySeason, function(season, index) {
+        return _c("div", { key: index }, [
+          _c(
+            "div",
+            { staticClass: "text-center mb-4" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "bg-gray-700 border border-white text-white select-none"
+                },
+                [_vm._v("T" + _vm._s(index))]
+              ),
+              _vm._v(" "),
+              _vm._l(season, function(episode) {
+                return _c(
+                  "div",
+                  {
+                    key: episode.seasonNumber + episode.episodeNumber,
+                    class: _vm.getEpisodeClass(episode.rating)
+                  },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(
+                          episode.rating ? episode.rating.averageRating : null
+                        ) +
+                        "\n            "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -33021,6 +33167,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchComponent_vue_vue_type_template_id_89b0c3cc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchComponent_vue_vue_type_template_id_89b0c3cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/widgets/TableWidget.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/widgets/TableWidget.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TableWidget_vue_vue_type_template_id_60fbca24___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableWidget.vue?vue&type=template&id=60fbca24& */ "./resources/js/widgets/TableWidget.vue?vue&type=template&id=60fbca24&");
+/* harmony import */ var _TableWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableWidget.vue?vue&type=script&lang=js& */ "./resources/js/widgets/TableWidget.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TableWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TableWidget_vue_vue_type_template_id_60fbca24___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TableWidget_vue_vue_type_template_id_60fbca24___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/widgets/TableWidget.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/widgets/TableWidget.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/widgets/TableWidget.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TableWidget.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/widgets/TableWidget.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/widgets/TableWidget.vue?vue&type=template&id=60fbca24&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/widgets/TableWidget.vue?vue&type=template&id=60fbca24& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableWidget_vue_vue_type_template_id_60fbca24___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TableWidget.vue?vue&type=template&id=60fbca24& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/widgets/TableWidget.vue?vue&type=template&id=60fbca24&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableWidget_vue_vue_type_template_id_60fbca24___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableWidget_vue_vue_type_template_id_60fbca24___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
