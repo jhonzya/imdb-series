@@ -2,6 +2,8 @@
 
 import { Line } from 'vue-chartjs';
 
+const randomColor = require('randomcolor');
+
 export default {
     name: "LineChart",
 
@@ -50,6 +52,7 @@ export default {
         groupData() {
             let labels = [];
             let datasets = [];
+            let color;
 
             _.each(this.episodes, (episodes, season) => {
                 let data = [];
@@ -59,9 +62,15 @@ export default {
                     data.push(episode.rating ? episode.rating.averageRating : 0);
                 });
 
+                color = randomColor({
+                    hue: 'green',
+                });
+
                 let dataset = {
                     label: `Temporada ${season}`,
                     fill: false,
+                    backgroundColor: color,
+                    borderColor: color,
                     data,
                 };
 
@@ -85,11 +94,17 @@ export default {
                 data.push(episode.rating ? episode.rating.averageRating : 0);
             });
 
+            const color = randomColor({
+                hue: 'green',
+            });
+
             this.chartData = {
                 labels,
                 datasets: [{
                     label: 'Rating',
-                    backgroundColor: 'transparent',
+                    fill: false,
+                    backgroundColor: color,
+                    borderColor: color,
                     data,
                 }]
             };
