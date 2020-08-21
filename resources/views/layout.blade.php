@@ -12,7 +12,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
-    <body class="h-screen bg-white">
+    <body class="h-screen">
         <div id="app" class="container mx-auto">
             @yield('container')
         </div>
