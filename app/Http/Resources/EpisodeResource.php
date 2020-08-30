@@ -15,6 +15,7 @@ class EpisodeResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'titleId' => $this->title_id,
             'seasonNumber' => $this->seasonNumber,
             'episodeNumber' => $this->episodeNumber,
             'rating' => $this->rating,

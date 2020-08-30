@@ -8,7 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import { TvIcon, SearchIcon, LoaderIcon } from "vue-feather-icons";
+import { LoaderIcon, SearchIcon, TvIcon } from "vue-feather-icons";
 
 /**
  * The following block of code may be used to automatically register your

@@ -2,18 +2,19 @@
     <div :class="grid">
         <div>
             <div class="text-center mb-4">
-                <div class="bg-gray-700 border border-white text-gray-700 select-none">S/T</div>
-                <div class="bg-gray-700 border border-white text-white select-none" v-for="index in maxEpisodeNumber" :key="index">
+                <div class="bg-gray-700 border border-gray-800 text-gray-700 select-none">S/T</div>
+                <div class="bg-gray-700 border border-gray-800 text-white select-none" v-for="index in maxEpisodeNumber" :key="index">
                     {{ index }}
                 </div>
             </div>
         </div>
         <div v-for="(season, index) in episodesBySeason" :key="index">
             <div class="text-center mb-4">
-                <div class="bg-gray-700 border border-white text-white select-none">T{{ index }}</div>
+                <div class="bg-gray-700 border border-gray-800 text-white select-none">T{{ index }}</div>
                 <div v-for="episode in season"
                     :key="episode.seasonNumber + episode.episodeNumber"
-                    :class="getEpisodeClass(episode.rating)">
+                    :class="getEpisodeClass(episode.rating)"
+                     @click.prevent="getDetails(episode)">
                     {{ episode.rating ? episode.rating.averageRating : null }}
                 </div>
             </div>
@@ -63,10 +64,14 @@ export default {
     },
 
     methods: {
+        getDetails(episode) {
+            console.log(episode);
+        },
+
         getEpisodeClass(rating) {
             const number = parseFloat(rating ? rating.averageRating : null);
             let color = 'gray';
-            let opacity = 300;
+            let opacity = 400;
 
             if(number >= 10) {
                 color = 'blue';
@@ -87,8 +92,11 @@ export default {
                 'select-none',
                 'cursor-pointer',
                 `bg-${color}-${opacity}`,
-                `hover:bg-${color}-${opacity+200}`,
-                'border border-white rounded',
+                `hover:bg-${color}-${opacity+100}`,
+                `focus:bg-${color}-${opacity+100}`,
+                'border border-gray-800',
+                `text-${color}-${opacity}`,
+                `hover:text-gray-800`,
             ];
         },
     },

@@ -3098,6 +3098,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TableWidget",
   props: {
@@ -3139,10 +3140,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    getDetails: function getDetails(episode) {
+      console.log(episode);
+    },
     getEpisodeClass: function getEpisodeClass(rating) {
       var number = parseFloat(rating ? rating.averageRating : null);
       var color = 'gray';
-      var opacity = 300;
+      var opacity = 400;
 
       if (number >= 10) {
         color = 'blue';
@@ -3159,7 +3163,7 @@ __webpack_require__.r(__webpack_exports__);
         opacity = 400;
       }
 
-      return ['select-none', 'cursor-pointer', "bg-".concat(color, "-").concat(opacity), "hover:bg-".concat(color, "-").concat(opacity + 200), 'border border-white rounded'];
+      return ['select-none', 'cursor-pointer', "bg-".concat(color, "-").concat(opacity), "hover:bg-".concat(color, "-").concat(opacity + 100), "focus:bg-".concat(color, "-").concat(opacity + 100), 'border border-gray-800', "text-".concat(color, "-").concat(opacity), "hover:text-gray-800"];
     }
   }
 });
@@ -73729,14 +73733,6 @@ var render = function() {
               "episodes-by-season": _vm.groupBySeason
             }
           })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.episodes.length > 0
-        ? _c("ChartWidget", { attrs: { episodes: _vm.episodes } })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.episodes.length > 0
-        ? _c("ChartWidget", { attrs: { episodes: _vm.groupBySeason } })
         : _vm._e()
     ],
     1
@@ -74096,7 +74092,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "bg-gray-700 border border-white text-gray-700 select-none"
+                  "bg-gray-700 border border-gray-800 text-gray-700 select-none"
               },
               [_vm._v("S/T")]
             ),
@@ -74107,7 +74103,7 @@ var render = function() {
                 {
                   key: index,
                   staticClass:
-                    "bg-gray-700 border border-white text-white select-none"
+                    "bg-gray-700 border border-gray-800 text-white select-none"
                 },
                 [
                   _vm._v(
@@ -74131,7 +74127,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "bg-gray-700 border border-white text-white select-none"
+                    "bg-gray-700 border border-gray-800 text-white select-none"
                 },
                 [_vm._v("T" + _vm._s(index))]
               ),
@@ -74141,7 +74137,13 @@ var render = function() {
                   "div",
                   {
                     key: episode.seasonNumber + episode.episodeNumber,
-                    class: _vm.getEpisodeClass(episode.rating)
+                    class: _vm.getEpisodeClass(episode.rating),
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.getDetails(episode)
+                      }
+                    }
                   },
                   [
                     _vm._v(

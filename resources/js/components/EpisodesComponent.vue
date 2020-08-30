@@ -6,8 +6,8 @@
             :episodes-by-season="groupBySeason"
         />
 
-        <ChartWidget v-if="episodes.length > 0" :episodes="episodes"/>
-        <ChartWidget v-if="episodes.length > 0" :episodes="groupBySeason"/>
+        <!--ChartWidget v-if="episodes.length > 0" :episodes="episodes"/>
+        <ChartWidget v-if="episodes.length > 0" :episodes="groupBySeason"/-->
     </div>
 </template>
 
