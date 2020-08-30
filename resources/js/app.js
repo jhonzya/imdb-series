@@ -8,7 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import { TvIcon, SearchIcon } from "vue-feather-icons";
+import { TvIcon, SearchIcon, LoaderIcon } from "vue-feather-icons";
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,8 +24,10 @@ import { TvIcon, SearchIcon } from "vue-feather-icons";
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('search-component', require('./components/SearchComponent.vue').default);
 Vue.component('episodes-component', require('./components/EpisodesComponent.vue').default);
-Vue.component('tv-icon', TvIcon);
+
+Vue.component('loader-icon', LoaderIcon);
 Vue.component('search-icon', SearchIcon);
+Vue.component('tv-icon', TvIcon);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -2965,6 +2965,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SearchComponent",
@@ -2981,7 +2982,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       focus: false,
       placeholder: 'Buscar serie',
-      value: ''
+      value: '',
+      searching: false,
+      min: 3
     };
   },
   methods: {
@@ -2990,15 +2993,17 @@ __webpack_require__.r(__webpack_exports__);
 
       this.value = q;
       return new Promise(function (resolve) {
-        if (q.length < 3) {
+        if (q.length < _this.min) {
           return resolve([]);
         }
 
+        _this.searching = true;
         axios.get(_this.api, {
           params: {
             q: q
           }
         }).then(function (response) {
+          _this.searching = false;
           resolve(response.data.data);
         })["catch"](function (e) {
           console.error(e);
@@ -3006,6 +3011,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onSubmit: function onSubmit(result) {
+      this.searching = true;
       window.open(result.profile, '_self');
     },
     handleFocus: function handleFocus() {
@@ -73837,9 +73843,13 @@ var render = function() {
                           "absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none z-10"
                       },
                       [
-                        _c("search-icon", {
-                          staticClass: "text-gray-500 inline-block"
-                        })
+                        _vm.searching
+                          ? _c("loader-icon", {
+                              staticClass: "text-gray-500 inline-block"
+                            })
+                          : _c("search-icon", {
+                              staticClass: "text-gray-500 inline-block"
+                            })
                       ],
                       1
                     ),
@@ -73962,7 +73972,9 @@ var render = function() {
                         )
                   ]),
                   _vm._v(" "),
-                  _vm.value && results.length === 0
+                  _vm.value.length >= _vm.min &&
+                  results.length === 0 &&
+                  !_vm.searching
                     ? _c(
                         "ul",
                         {
@@ -86352,8 +86364,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('search-component', __webpack_require__(/*! ./components/SearchComponent.vue */ "./resources/js/components/SearchComponent.vue")["default"]);
 Vue.component('episodes-component', __webpack_require__(/*! ./components/EpisodesComponent.vue */ "./resources/js/components/EpisodesComponent.vue")["default"]);
-Vue.component('tv-icon', vue_feather_icons__WEBPACK_IMPORTED_MODULE_0__["TvIcon"]);
+Vue.component('loader-icon', vue_feather_icons__WEBPACK_IMPORTED_MODULE_0__["LoaderIcon"]);
 Vue.component('search-icon', vue_feather_icons__WEBPACK_IMPORTED_MODULE_0__["SearchIcon"]);
+Vue.component('tv-icon', vue_feather_icons__WEBPACK_IMPORTED_MODULE_0__["TvIcon"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
