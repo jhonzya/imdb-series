@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Title;
 use App\Http\Resources\TitleResource;
+use App\Title;
 use Illuminate\Http\Request;
 
 class TitleController extends Controller
