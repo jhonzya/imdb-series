@@ -8,7 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import { TvIcon } from "vue-feather-icons";
+import { TvIcon, SearchIcon } from "vue-feather-icons";
 
 /**
  * The following block of code may be used to automatically register your
@@ -25,6 +25,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('search-component', require('./components/SearchComponent.vue').default);
 Vue.component('episodes-component', require('./components/EpisodesComponent.vue').default);
 Vue.component('tv-icon', TvIcon);
+Vue.component('search-icon', SearchIcon);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -18,13 +18,18 @@
               }"
             >
                 <div v-bind="rootProps">
-                    <input
-                        v-model="value"
-                        v-bind="inputProps"
-                        v-on="inputListeners"
-                        @focus="handleFocus"
-                        @blur="handleBlur"
-                    >
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none z-10">
+                            <search-icon class="text-gray-500 inline-block"></search-icon>
+                        </div>
+                        <input
+                            v-model="value"
+                            v-bind="inputProps"
+                            v-on="inputListeners"
+                            @focus="handleFocus"
+                            @blur="handleBlur"
+                        >
+                    </div>
                     <ul
                         v-if="value && results.length === 0"
                         class="autocomplete-result-list"

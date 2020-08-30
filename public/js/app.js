@@ -2960,6 +2960,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SearchComponent",
@@ -73824,121 +73829,138 @@ var render = function() {
               var resultProps = ref.resultProps
               return [
                 _c("div", _vm._b({}, "div", rootProps, false), [
-                  inputProps.type === "checkbox"
-                    ? _c(
-                        "input",
-                        _vm._g(
-                          _vm._b(
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.value,
-                                  expression: "value"
-                                }
-                              ],
-                              attrs: { type: "checkbox" },
-                              domProps: {
-                                checked: Array.isArray(_vm.value)
-                                  ? _vm._i(_vm.value, null) > -1
-                                  : _vm.value
-                              },
-                              on: {
-                                focus: _vm.handleFocus,
-                                blur: _vm.handleBlur,
-                                change: function($event) {
-                                  var $$a = _vm.value,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = null,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 && (_vm.value = $$a.concat([$$v]))
+                  _c("div", { staticClass: "relative" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none z-10"
+                      },
+                      [
+                        _c("search-icon", {
+                          staticClass: "text-gray-500 inline-block"
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    inputProps.type === "checkbox"
+                      ? _c(
+                          "input",
+                          _vm._g(
+                            _vm._b(
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.value,
+                                    expression: "value"
+                                  }
+                                ],
+                                attrs: { type: "checkbox" },
+                                domProps: {
+                                  checked: Array.isArray(_vm.value)
+                                    ? _vm._i(_vm.value, null) > -1
+                                    : _vm.value
+                                },
+                                on: {
+                                  focus: _vm.handleFocus,
+                                  blur: _vm.handleBlur,
+                                  change: function($event) {
+                                    var $$a = _vm.value,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          (_vm.value = $$a.concat([$$v]))
+                                      } else {
+                                        $$i > -1 &&
+                                          (_vm.value = $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1)))
+                                      }
                                     } else {
-                                      $$i > -1 &&
-                                        (_vm.value = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                      _vm.value = $$c
                                     }
-                                  } else {
-                                    _vm.value = $$c
                                   }
                                 }
-                              }
-                            },
-                            "input",
-                            inputProps,
-                            false
-                          ),
-                          inputListeners
+                              },
+                              "input",
+                              inputProps,
+                              false
+                            ),
+                            inputListeners
+                          )
                         )
-                      )
-                    : inputProps.type === "radio"
-                    ? _c(
-                        "input",
-                        _vm._g(
-                          _vm._b(
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.value,
-                                  expression: "value"
-                                }
-                              ],
-                              attrs: { type: "radio" },
-                              domProps: { checked: _vm._q(_vm.value, null) },
-                              on: {
-                                focus: _vm.handleFocus,
-                                blur: _vm.handleBlur,
-                                change: function($event) {
-                                  _vm.value = null
-                                }
-                              }
-                            },
-                            "input",
-                            inputProps,
-                            false
-                          ),
-                          inputListeners
-                        )
-                      )
-                    : _c(
-                        "input",
-                        _vm._g(
-                          _vm._b(
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.value,
-                                  expression: "value"
-                                }
-                              ],
-                              attrs: { type: inputProps.type },
-                              domProps: { value: _vm.value },
-                              on: {
-                                focus: _vm.handleFocus,
-                                blur: _vm.handleBlur,
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                      : inputProps.type === "radio"
+                      ? _c(
+                          "input",
+                          _vm._g(
+                            _vm._b(
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.value,
+                                    expression: "value"
                                   }
-                                  _vm.value = $event.target.value
+                                ],
+                                attrs: { type: "radio" },
+                                domProps: { checked: _vm._q(_vm.value, null) },
+                                on: {
+                                  focus: _vm.handleFocus,
+                                  blur: _vm.handleBlur,
+                                  change: function($event) {
+                                    _vm.value = null
+                                  }
                                 }
-                              }
-                            },
-                            "input",
-                            inputProps,
-                            false
-                          ),
-                          inputListeners
+                              },
+                              "input",
+                              inputProps,
+                              false
+                            ),
+                            inputListeners
+                          )
                         )
-                      ),
+                      : _c(
+                          "input",
+                          _vm._g(
+                            _vm._b(
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.value,
+                                    expression: "value"
+                                  }
+                                ],
+                                attrs: { type: inputProps.type },
+                                domProps: { value: _vm.value },
+                                on: {
+                                  focus: _vm.handleFocus,
+                                  blur: _vm.handleBlur,
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.value = $event.target.value
+                                  }
+                                }
+                              },
+                              "input",
+                              inputProps,
+                              false
+                            ),
+                            inputListeners
+                          )
+                        )
+                  ]),
                   _vm._v(" "),
                   _vm.value && results.length === 0
                     ? _c(
@@ -86331,6 +86353,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('search-component', __webpack_require__(/*! ./components/SearchComponent.vue */ "./resources/js/components/SearchComponent.vue")["default"]);
 Vue.component('episodes-component', __webpack_require__(/*! ./components/EpisodesComponent.vue */ "./resources/js/components/EpisodesComponent.vue")["default"]);
 Vue.component('tv-icon', vue_feather_icons__WEBPACK_IMPORTED_MODULE_0__["TvIcon"]);
+Vue.component('search-icon', vue_feather_icons__WEBPACK_IMPORTED_MODULE_0__["SearchIcon"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
