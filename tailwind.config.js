@@ -1,6 +1,9 @@
 module.exports = {
     purge: [],
     theme: {
+        fontFamily: {
+            'fixed': ['"Fixedsys Excelsior 3.01"'],
+        },
         extend: {
             gridTemplateColumns: {
                 '13': 'repeat(13, minmax(0, 1fr))',

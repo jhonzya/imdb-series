@@ -27,6 +27,7 @@
         "chart.js": "^2.9.3",
         "randomcolor": "^0.6.2",
         "tailwindcss": "^1.6.2",
-        "vue-chartjs": "^3.5.0"
+        "vue-chartjs": "^3.5.0",
+        "vue-feather-icons": "^5.1.0"
     }
 }

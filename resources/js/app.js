@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import { TvIcon } from "vue-feather-icons";
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22,6 +24,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('search-component', require('./components/SearchComponent.vue').default);
 Vue.component('episodes-component', require('./components/EpisodesComponent.vue').default);
+Vue.component('tv-icon', TvIcon);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
