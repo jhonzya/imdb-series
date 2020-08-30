@@ -3100,6 +3100,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TableWidget",
   props: {
@@ -74164,7 +74165,6 @@ var render = function() {
                   staticClass: "fixed inset-0 transition-opacity",
                   on: {
                     click: function($event) {
-                      $event.preventDefault()
                       _vm.modal = false
                     }
                   }
@@ -74188,12 +74188,25 @@ var render = function() {
                   }
                 },
                 [
-                  _c("div", { staticClass: "bg-gray-800 px-4 py-5" }, [
+                  _c("div", { staticClass: "bg-gray-800 px-4 pb-5 pt-3" }, [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-right cursor-pointer",
+                        on: {
+                          click: function($event) {
+                            _vm.modal = false
+                          }
+                        }
+                      },
+                      [_vm._v("x")]
+                    ),
+                    _vm._v(" "),
                     _c(
                       "h3",
                       {
                         staticClass:
-                          "text-lg leading-6 font-medium text-white text-left"
+                          "text-lg leading-6 font-medium text-white text-left mb-3"
                       },
                       [
                         _vm._v(
@@ -74208,7 +74221,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "mt-2 text-gray-500 text-sm leading-5 text-center"
+                          "text-gray-500 text-sm leading-5 text-center"
                       },
                       [
                         _c(

@@ -25,16 +25,17 @@
         <!-- component -->
         <div v-if="modal" class="fixed z-10 inset-0 overflow-y-auto">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20">
-                <div class="fixed inset-0 transition-opacity" @click.prevent="modal = false">
+                <div class="fixed inset-0 transition-opacity" @click="modal = false">
                     <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
                 </div>
 
                 <div class="inline-block border-white border-2 transform transition-all sm:max-w-lg w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                    <div class="bg-gray-800 px-4 py-5">
-                        <h3 class="text-lg leading-6 font-medium text-white text-left">
+                    <div class="bg-gray-800 px-4 pb-5 pt-3">
+                        <p class="text-right cursor-pointer" @click="modal = false">x</p>
+                        <h3 class="text-lg leading-6 font-medium text-white text-left mb-3">
                             {{ episode.detail.primaryTitle }}
                         </h3>
-                        <div class="mt-2 text-gray-500 text-sm leading-5 text-center">
+                        <div class="text-gray-500 text-sm leading-5 text-center">
                             <p :class="getEpisodeClass(episode.rating, false)">
                                 {{ episode.rating.averageRating }} / 10
                             </p>
