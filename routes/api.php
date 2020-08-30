@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/title/search', 'TitleController@search')->name('search');
 Route::get('/title/{title}/show', 'TitleController@show')->name('show');
+Route::get('/episode/{episode}/show', 'TitleController@episode')->name('episode');

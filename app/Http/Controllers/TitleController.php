@@ -22,4 +22,9 @@ class TitleController extends Controller
 
         return new TitleResource($title);
     }
+
+    public function episode(Title $title)
+    {
+        return new TitleResource($title);
+    }
 }

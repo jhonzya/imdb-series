@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Scopes\SeriesScope;
+use App\Title;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        Route::bind('episode', function ($id) {
+            return Title::withoutGlobalScope(SeriesScope::class)->findOrFail($id);
+        });
     }
 
     /**
