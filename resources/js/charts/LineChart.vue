@@ -63,7 +63,7 @@ export default {
                 });
 
                 color = randomColor({
-                    hue: 'green',
+                    hue: 'blue',
                 });
 
                 let dataset = {
@@ -95,7 +95,7 @@ export default {
             });
 
             const color = randomColor({
-                hue: 'green',
+                hue: 'blue',
             });
 
             this.chartData = {
