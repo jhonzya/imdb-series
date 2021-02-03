@@ -4,9 +4,12 @@ namespace App;
 
 use App\Scopes\SeriesScope;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Title extends Model
 {
+    use Searchable;
+
     public $incrementing = false;
     public $timestamps = false;
     protected $appends = ['link', 'api'];
