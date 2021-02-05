@@ -27,7 +27,8 @@ class TitleResource extends JsonResource
             'type' => $this->type,
             'link' => $this->link,
             'profile' => $this->when($isSerie, function () {
-                return route('series', ['title' => $this->id]);
+                $id = str_pad($this->id, 7, '0', STR_PAD_LEFT);
+                return "/tt{$id}";
             }),
             'episodes' => EpisodeResource::collection($this->whenLoaded('episodes')),
             'rating' => new RatingResource($this->whenLoaded('rating')),
