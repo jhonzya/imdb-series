@@ -39,9 +39,9 @@ class Title extends Model
     public function getTypeAttribute(): string
     {
         $types = [
-            Cache::get('tvSeries') => 'Serie',
-            Cache::get('tvEpisode') => 'Episode',
-            Cache::get('tvMiniSeries') => 'Mini Serie',
+            Cache::get('tvSeries') => 'TV Serie',
+            Cache::get('tvEpisode') => 'TV Episode',
+            Cache::get('tvMiniSeries') => 'TV Mini Serie',
         ];
 
         return $types[$this->type_id];

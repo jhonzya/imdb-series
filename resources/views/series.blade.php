@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('page', "{$title->primaryTitle} (TV Series {$title->startYear} - {$title->endYear})")
+@section('page', "{$title->primaryTitle} ({$title->type} {$title->startYear} - {$title->endYear})")
 
 @section('container')
     <div class="flex bg-gray-800 border-b border-white fixed top-0 inset-x-0 z-100 h-16 items-center">
@@ -37,7 +37,7 @@
                     </h1>
 
                     <div class="mt-0 mb-4 text-gray-500">
-                        <a href="{{ $title->link }}" class="underline select-none" target="_blank">Ver en IMDb</a>
+                        <a href="{{ $title->link }}" class="underline select-none" target="_blank">Show on IMDb</a>
                     </div>
 
                     <div class="mt-0 mb-4">

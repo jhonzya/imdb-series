@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('page', 'Buscar serie')
+@section('page', 'Search serie')
 
 @section('container')
     <div class="px-4">

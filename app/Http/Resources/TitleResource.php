@@ -25,6 +25,7 @@ class TitleResource extends JsonResource
             'primaryTitle' => $this->primaryTitle,
             'startYear' => $this->startYear,
             'type' => $this->type,
+            'link' => $this->link,
             'profile' => $this->when($isSerie, function () {
                 return route('series', ['title' => $this->id]);
             }),

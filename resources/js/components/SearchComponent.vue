@@ -74,7 +74,7 @@ export default {
     data() {
         return {
             focus: false,
-            placeholder: 'Buscar serie',
+            placeholder: 'Search serie',
             value: '',
             searching: false,
             min: 3,

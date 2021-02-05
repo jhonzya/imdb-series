@@ -32,15 +32,18 @@
                 <div class="inline-block border-white border-2 transform transition-all sm:max-w-lg w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                     <div class="bg-gray-800 px-4 pb-5 pt-3">
                         <p class="text-right cursor-pointer" @click="modal = false">x</p>
-                        <h3 class="text-lg leading-6 font-medium text-white text-left mb-3">
+                        <h3 class="text-lg leading-6 font-medium text-white text-left">
                             {{ episode.detail.primaryTitle }}
                         </h3>
+                        <div class="mt-0 mb-4 text-gray-500 text-sm">
+                            <a :href="episode.detail.link" class="underline select-none" target="_blank">Show on IMDb</a>
+                        </div>
                         <div class="text-gray-500 text-sm leading-5 text-center">
                             <p :class="getEpisodeClass(episode.rating, false)">
                                 {{ episode.rating ? episode.rating.averageRating : nullRating }}
                             </p>
                             <p>
-                                Temporada {{ episode.seasonNumber }} | Episodio {{ episode.episodeNumber }}
+                                Season {{ episode.seasonNumber }} | Episode {{ episode.episodeNumber }}
                             </p>
                         </div>
                     </div>
