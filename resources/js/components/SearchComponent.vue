@@ -45,8 +45,12 @@
                             v-for="(result, index) in results"
                             :key="resultProps[index].id"
                             v-bind="resultProps[index]"
+                            class="leading-none"
                         >
                             {{ result.primaryTitle }}
+                            <div class="text-sm text-gray-500">
+                                {{ result.startYear }} / {{ result.type }}
+                            </div>
                         </li>
                     </ul>
                 </div>

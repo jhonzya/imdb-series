@@ -6,6 +6,7 @@ use App\Scopes\SeriesScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Scout\Searchable;
 
 class Title extends Model
@@ -14,7 +15,8 @@ class Title extends Model
 
     public $incrementing = false;
     public $timestamps = false;
-    protected $appends = ['link', 'api'];
+    protected $appends = ['link', 'api', 'type'];
+    protected $with = ['rating'];
 
     protected static function booted()
     {
@@ -34,6 +36,16 @@ class Title extends Model
         return $website.'title/tt'.$id;
     }
 
+    public function getTypeAttribute(): string
+    {
+        $types = [
+            Cache::get('tvSeries') => 'Serie',
+            Cache::get('tvEpisode') => 'Episode',
+        ];
+
+        return $types[$this->type_id];
+    }
+
     // relationships
 
     public function episodes(): HasMany
@@ -46,5 +58,16 @@ class Title extends Model
     public function rating(): HasOne
     {
         return $this->hasOne('App\Rating', 'id');
+    }
+
+    // searchable
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'primaryTitle' => $this->primaryTitle,
+            'originalTitle' => $this->originalTitle,
+        ];
     }
 }

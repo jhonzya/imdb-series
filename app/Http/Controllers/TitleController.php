@@ -10,8 +10,12 @@ class TitleController extends Controller
 {
     public function search(Request $request)
     {
-        $titles = Title::where('primaryTitle', 'like', '%'.$request->get('q').'%')
-            ->limit(10)->get();
+        $titles = Title::search($request->get('q'))
+            ->get()
+            ->sortByDesc(function ($title) {
+                return $title->rating->numVotes ?? 0;
+            })
+            ->take(10);
 
         return TitleResource::collection($titles);
     }
