@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Type;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class TypeSeeder extends Seeder
 {
@@ -13,10 +15,12 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $serie = \App\Type::create(['type' => 'tvSeries']);
-        $episode = \App\Type::create(['type' => 'tvEpisode']);
+        $serie = Type::create(['type' => 'tvSeries']);
+        $episode = Type::create(['type' => 'tvEpisode']);
+        $miniSerie = Type::create(['type' => 'tvMiniSeries']);
 
-        \Illuminate\Support\Facades\Cache::forever('tvSeries', $serie->id);
-        \Illuminate\Support\Facades\Cache::forever('tvEpisode', $episode->id);
+        Cache::forever('tvSeries', $serie->id);
+        Cache::forever('tvEpisode', $episode->id);
+        Cache::forever('tvMiniSeries', $miniSerie->id);
     }
 }

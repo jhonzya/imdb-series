@@ -16,7 +16,7 @@
                          :key="episode.seasonNumber + episode.episodeNumber"
                          :class="getEpisodeClass(episode.rating)"
                          @click.prevent="getDetails(episode)">
-                        {{ episode.rating ? episode.rating.averageRating : null }}
+                        {{ episode.rating ? episode.rating.averageRating : nullRating }}
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                         </h3>
                         <div class="text-gray-500 text-sm leading-5 text-center">
                             <p :class="getEpisodeClass(episode.rating, false)">
-                                {{ episode.rating.averageRating }} / 10
+                                {{ episode.rating ? episode.rating.averageRating : nullRating }}
                             </p>
                             <p>
                                 Temporada {{ episode.seasonNumber }} | Episodio {{ episode.episodeNumber }}
@@ -66,6 +66,7 @@ export default {
                 extra: {},
             },
             modal: false,
+            nullRating: 'n/a',
         };
     },
 

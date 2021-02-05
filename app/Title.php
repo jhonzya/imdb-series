@@ -41,6 +41,7 @@ class Title extends Model
         $types = [
             Cache::get('tvSeries') => 'Serie',
             Cache::get('tvEpisode') => 'Episode',
+            Cache::get('tvMiniSeries') => 'Mini Serie',
         ];
 
         return $types[$this->type_id];

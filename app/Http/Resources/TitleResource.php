@@ -16,11 +16,16 @@ class TitleResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $isSerie = in_array($this->type_id, [
+            Cache::get('tvSeries'),
+            Cache::get('tvMiniSeries'),
+        ]);
+
         return [
             'primaryTitle' => $this->primaryTitle,
             'startYear' => $this->startYear,
             'type' => $this->type,
-            'profile' => $this->when($this->type_id == Cache::get('tvSeries'), function () {
+            'profile' => $this->when($isSerie, function () {
                 return route('series', ['title' => $this->id]);
             }),
             'episodes' => EpisodeResource::collection($this->whenLoaded('episodes')),

@@ -11,6 +11,9 @@ class SeriesScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('type_id', Cache::get('tvSeries'));
+        $builder->whereIn('type_id', [
+            Cache::get('tvSeries'),
+            Cache::get('tvMiniSeries'),
+        ]);
     }
 }

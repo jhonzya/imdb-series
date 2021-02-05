@@ -51,7 +51,9 @@ class ClearDatabase extends Command
         })->orWhereNotIn('parent_id', function ($query) {
             $query->select('id')
                 ->from('titles');
-        })->delete();
+        })->orWhereNull('seasonNumber')
+            ->orWhereNull('episodeNumber')
+            ->delete();
         $this->line("$count episodes");
 
         $count = Rating::whereNotIn('id', function ($query) {

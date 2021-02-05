@@ -71,13 +71,14 @@ class SaveDatabase extends Command
         if (! Storage::disk(config('imdb.disk'))->exists($tmp)) {
             $this->line('awk...');
 
-            $awk = 'awk \'/tvSeries/ || /tvEpisode/\' '.$path.' > '.$out;
+            $awk = 'awk \'/tvSeries/ || /tvEpisode/ || /tvMiniSeries/\' '.$path.' > '.$out;
             exec($awk);
         }
 
         $database = config('database.connections.mysql.database');
         $tvSeries = Cache::get('tvSeries');
         $tvEpisode = Cache::get('tvEpisode');
+        $tvMiniSeries = Cache::get('tvMiniSeries');
 
         $sql = "LOAD DATA INFILE '$out'
             REPLACE INTO TABLE $database.titles
@@ -85,7 +86,11 @@ class SaveDatabase extends Command
             LINES TERMINATED BY '\n'
             (@id,@type_id,@primaryTitle,@originalTitle,isAdult,startYear,@endYear,@runtimeMinutes,@dummy)
             SET id = CAST(REPLACE(@id,'tt','') AS UNSIGNED),
-                type_id = IF(STRCMP(@type_id,'tvSeries') = 0, $tvSeries, $tvEpisode),
+                type_id = CASE
+                    WHEN @type_id = 'tvSeries' THEN $tvSeries
+                    WHEN @type_id = 'tvEpisode' THEN $tvEpisode
+                    WHEN @type_id = 'tvMiniSeries' THEN $tvMiniSeries
+                END,
                 primaryTitle = LEFT(@primaryTitle, 255),
                 originalTitle = LEFT(@originalTitle, 255),
                 endYear = IF(STRCMP(@endYear,'\\N') = 0, NULL, @endYear),
