@@ -80,7 +80,7 @@ class SaveDatabase extends Command
         $tvEpisode = Cache::get('tvEpisode');
         $tvMiniSeries = Cache::get('tvMiniSeries');
 
-        $sql = "LOAD DATA INFILE '$out'
+        $sql = "LOAD DATA LOCAL INFILE '$out'
             REPLACE INTO TABLE $database.titles
             FIELDS TERMINATED BY '\t'
             LINES TERMINATED BY '\n'
