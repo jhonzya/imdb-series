@@ -1,6 +1,7 @@
 @extends('layout')
 
-@section('page', "{$title->primaryTitle} ({$title->type} {$title->startYear} - {$title->endYear})")
+@section('page', "{$title->primaryTitle}")
+@section('description', "{$title->type} {$title->startYear} - {$title->endYear}")
 
 @section('container')
     <div class="flex bg-gray-800 border-b border-white fixed top-0 inset-x-0 z-100 h-16 items-center">

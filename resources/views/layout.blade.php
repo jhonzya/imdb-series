@@ -4,10 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>@yield('page')</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <title>@yield('page') / {{ config('app.name') }}</title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -16,6 +13,25 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
         <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
+        <meta name="description" content="@yield('page', config('app.description'))">
+        <meta name="keywords" content="@yield('page'), tv, series, imdb, ranking">
+
+        <meta property="og:url" content="{{ url()->current() }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="@yield('page') / {{ config('app.name') }}" />
+        <meta property="og:description" content="@yield('description', config('app.description'))" />
+        <meta property="og:image" content="{{ asset('img/logo.png') }}" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="{{ config('app.name') }}" />
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="{{ url()->current() }}">
+        <meta name="twitter:creator" content="@jhonzya">
+        <meta name="twitter:title" content="@yield('page') / {{ config('app.name') }}">
+        <meta name="twitter:description" content="@yield('description', config('app.description'))">
+        <meta name="twitter:image" content="{{ asset('img/logo.png') }}">
+        <meta name="twitter:image:alt" content="{{ config('app.name') }}">
     </head>
     <body class="font-fixed h-screen bg-gray-800 text-white">
         <div id="app" class="container mx-auto">
