@@ -65,6 +65,11 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'imdb' => [
+            'driver' => 'local',
+            'root' => storage_path('app/imdb'),
+        ],
+
     ],
 
     /*

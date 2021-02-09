@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('index');
+
+Route::get('/tt{title}', function (\App\Title $title) {
+    return view('series')->with(compact('title'));
+})->name('series');
