@@ -7,7 +7,7 @@
         <div class="flex py-10 md:py-20 lg:py-24">
             <div class="m-auto">
                 <h1 class="text-6xl title">
-                    axio
+                    tv-series
                 </h1>
             </div>
         </div>

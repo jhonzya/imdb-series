@@ -9,11 +9,7 @@
             <div class="flex items-center -mx-6">
                 <div class="pl-6 pr-6">
                     <a href="/" class="block">
-                        <div class="hidden md:block text-3xl">
-                            axio
-                        </div>
-
-                        <div class="block md:hidden">
+                        <div class="block">
                             <tv-icon class="inline-block"></tv-icon>
                         </div>
                     </a>
