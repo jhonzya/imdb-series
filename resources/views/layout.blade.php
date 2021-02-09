@@ -33,10 +33,13 @@
         <meta name="twitter:image" content="{{ asset('img/logo.png') }}">
         <meta name="twitter:image:alt" content="{{ config('app.name') }}">
     </head>
-    <body class="font-fixed h-screen bg-gray-800 text-white">
+    <body class="flex flex-col h-screen justify-between font-fixed bg-gray-800 text-white">
         <div id="app" class="container mx-auto">
             @yield('container')
         </div>
+        <footer class="container mx-auto h-16">
+            @include('footer')
+        </footer>
     </body>
 
     <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
