@@ -120,7 +120,6 @@ export default {
         getEpisodeClass(rating, pointer = true) {
             const number = parseFloat(rating ? rating.averageRating : null);
             let color = 'gray';
-            let opacity = 400;
 
             if(number >= 10) {
                 color = 'blue';
@@ -134,20 +133,19 @@ export default {
                 color = 'pink';
             } else if(number > 0) {
                 color = 'red';
-                opacity = 400;
             }
 
             let classes = [
                 'select-none',
-                `bg-${color}-${opacity}`,
+                `bg-${color}-400`,
                 'border border-gray-800',
             ];
 
             if(pointer) {
                 classes = classes.concat([
-                    `hover:bg-${color}-${opacity+100}`,
-                    `focus:bg-${color}-${opacity+100}`,
-                    `text-${color}-${opacity}`,
+                    `hover:bg-${color}-500`,
+                    `focus:bg-${color}-500`,
+                    `text-transparent`,
                     `hover:text-gray-800`,
                     'cursor-pointer',
                 ]);

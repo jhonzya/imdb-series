@@ -1,9 +1,5 @@
 module.exports = {
-    purge: [
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
-        './resources/**/*.vue',
-    ],
+    purge: false,
     theme: {
         fontFamily: {
             'fixed': ['"Fixedsys Excelsior 3.01"'],
