@@ -7,15 +7,40 @@ module.exports = {
             'fixed': ['"Fixedsys Excelsior 3.01"'],
         },
         colors: {
-            blue: colors.blue,
-            gray: colors.gray,
-            green: colors.green,
-            orange: colors.orange,
-            pink: colors.pink,
-            red: colors.red,
+            blue: {
+                400: colors.blue[400],
+                500: colors.blue[500],
+                700: colors.blue[700],
+            },
+            gray: {
+                400: colors.gray[400],
+                500: colors.gray[500],
+                600: colors.gray[600],
+                700: colors.gray[700],
+                800: colors.gray[800],
+            },
+            green: {
+                400: colors.green[400],
+                500: colors.green[500],
+            },
+            orange: {
+                400: colors.orange[400],
+                500: colors.orange[500],
+            },
+            pink: {
+                400: colors.pink[400],
+                500: colors.pink[500],
+            },
+            red: {
+                400: colors.red[400],
+                500: colors.red[500],
+            },
             transparent: colors.transparent,
             white: colors.white,
-            yellow: colors.yellow,
+            yellow: {
+                400: colors.yellow[400],
+                500: colors.yellow[500],
+            },
         },
         extend: {
             gridTemplateColumns: {
