@@ -1,8 +1,21 @@
+const { colors } = require('tailwindcss/defaultTheme');
+
 module.exports = {
     purge: false,
     theme: {
         fontFamily: {
             'fixed': ['"Fixedsys Excelsior 3.01"'],
+        },
+        colors: {
+            blue: colors.blue,
+            gray: colors.gray,
+            green: colors.green,
+            orange: colors.orange,
+            pink: colors.pink,
+            red: colors.red,
+            transparent: colors.transparent,
+            white: colors.white,
+            yellow: colors.yellow,
         },
         extend: {
             gridTemplateColumns: {
