@@ -101,8 +101,8 @@ class SaveDatabase extends Command
 
             Storage::disk(config('imdb.disk'))->put('sql/title.sql', $sql);
 
-            DB::connection()->getPdo()->exec($sql);
-            //Storage::disk(config('imdb.disk'))->delete($tmp);
+            // DB::connection()->getPdo()->exec($sql);
+            // Storage::disk(config('imdb.disk'))->delete($tmp);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
@@ -131,7 +131,7 @@ class SaveDatabase extends Command
 
             Storage::disk(config('imdb.disk'))->put('sql/episode.sql', $sql);
 
-            DB::connection()->getPdo()->exec($sql);
+            // DB::connection()->getPdo()->exec($sql);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
@@ -157,7 +157,7 @@ class SaveDatabase extends Command
 
             Storage::disk(config('imdb.disk'))->put('sql/rating.sql', $sql);
 
-            DB::connection()->getPdo()->exec($sql);
+            // DB::connection()->getPdo()->exec($sql);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
