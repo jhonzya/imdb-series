@@ -99,10 +99,8 @@ class SaveDatabase extends Command
         try {
             $this->line('database...');
 
-            Storage::disk(config('imdb.disk'))->put('sql/title.sql', $sql);
-
-            // DB::connection()->getPdo()->exec($sql);
-            // Storage::disk(config('imdb.disk'))->delete($tmp);
+            DB::connection()->getPdo()->exec($sql);
+            Storage::disk(config('imdb.disk'))->delete($tmp);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
@@ -115,7 +113,7 @@ class SaveDatabase extends Command
         $database = config('database.connections.mysql.database');
         $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.episode.tsv');
 
-        $sql = "LOAD DATA INFILE '$episode'
+        $sql = "LOAD DATA LOCAL INFILE '$episode'
             REPLACE INTO TABLE $database.episodes
             FIELDS TERMINATED BY '\t'
             LINES TERMINATED BY '\n'
@@ -129,9 +127,7 @@ class SaveDatabase extends Command
         try {
             $this->line('database...');
 
-            Storage::disk(config('imdb.disk'))->put('sql/episode.sql', $sql);
-
-            // DB::connection()->getPdo()->exec($sql);
+            DB::connection()->getPdo()->exec($sql);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
@@ -144,7 +140,7 @@ class SaveDatabase extends Command
         $database = config('database.connections.mysql.database');
         $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.ratings.tsv');
 
-        $sql = "LOAD DATA INFILE '$episode'
+        $sql = "LOAD DATA LOCAL INFILE '$episode'
             REPLACE INTO TABLE $database.ratings
             FIELDS TERMINATED BY '\t'
             LINES TERMINATED BY '\n'
@@ -155,9 +151,7 @@ class SaveDatabase extends Command
         try {
             $this->line('database...');
 
-            Storage::disk(config('imdb.disk'))->put('sql/rating.sql', $sql);
-
-            // DB::connection()->getPdo()->exec($sql);
+            DB::connection()->getPdo()->exec($sql);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
