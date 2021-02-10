@@ -99,6 +99,8 @@ class SaveDatabase extends Command
         try {
             $this->line('database...');
 
+            Log::info($sql);
+
             DB::connection()->getPdo()->exec($sql);
             Storage::disk(config('imdb.disk'))->delete($tmp);
         } catch (\Throwable $e) {
