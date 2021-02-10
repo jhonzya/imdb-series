@@ -113,7 +113,7 @@ class SaveDatabase extends Command
         $database = config('database.connections.mysql.database');
         $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.episode.tsv');
 
-        $sql = "LOAD DATA INFILE '$episode'
+        $sql = "LOAD DATA LOCAL INFILE '$episode'
             REPLACE INTO TABLE $database.episodes
             FIELDS TERMINATED BY '\t'
             LINES TERMINATED BY '\n'
@@ -140,7 +140,7 @@ class SaveDatabase extends Command
         $database = config('database.connections.mysql.database');
         $episode = Storage::disk(config('imdb.disk'))->path('unzip/title.ratings.tsv');
 
-        $sql = "LOAD DATA INFILE '$episode'
+        $sql = "LOAD DATA LOCAL INFILE '$episode'
             REPLACE INTO TABLE $database.ratings
             FIELDS TERMINATED BY '\t'
             LINES TERMINATED BY '\n'
