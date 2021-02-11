@@ -68,11 +68,9 @@ export default {
     components: {
         Autocomplete,
     },
-    props: {
-        api: {type: String, required: true},
-    },
     data() {
         return {
+            api: '/api/title/search',
             focus: false,
             placeholder: 'Search serie',
             value: '',

@@ -16,9 +16,7 @@
                 </div>
 
                 <div class="flex flex-grow items-center">
-                    <search-component
-                        api="{{ route('search') }}">
-                    </search-component>
+                    <search-component></search-component>
                 </div>
 
                 <div class="pl-6 pr-6" @@click.prevent="modal = true">
@@ -41,7 +39,7 @@
                     </div>
 
                     <div class="mt-0 mb-4">
-                        <episodes-component api="{{ $title->api }}"></episodes-component>
+                        <episodes-component id="{{ $title->id }}"></episodes-component>
                     </div>
                 </div>
             </div>

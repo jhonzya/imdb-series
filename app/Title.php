@@ -23,11 +23,6 @@ class Title extends Model
         static::addGlobalScope(new SeriesScope());
     }
 
-    public function getApiAttribute(): string
-    {
-        return route('show', ['title' => $this->attributes['id']]);
-    }
-
     public function getLinkAttribute(): string
     {
         $id = str_pad($this->attributes['id'], 7, '0', STR_PAD_LEFT);
