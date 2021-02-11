@@ -2,8 +2,6 @@
 
 import { Line } from 'vue-chartjs';
 
-const randomColor = require('randomcolor');
-
 export default {
     name: "LineChart",
 
@@ -88,14 +86,15 @@ export default {
         ratingData() {
             let labels = [];
             let data = [];
+            let colors = [];
 
             _.each(this.episodes, episode => {
-                labels.push(`T${episode.seasonNumber}: ${episode.episodeNumber}`);
-                data.push(episode.rating ? episode.rating.averageRating : 0);
-            });
+                if(episode.rating) {
+                    data.push(episode.rating.averageRating);
+                    colors.push(this.getColor(episode.rating.averageRating));
+                }
 
-            const color = randomColor({
-                hue: 'blue',
+                labels.push(`T${episode.seasonNumber}: ${episode.episodeNumber}`);
             });
 
             this.chartData = {
@@ -103,11 +102,32 @@ export default {
                 datasets: [{
                     label: 'Rating',
                     fill: false,
-                    backgroundColor: color,
-                    borderColor: color,
+                    backgroundColor: colors,
+                    borderColor: 'white',
                     data,
                 }]
             };
+        },
+
+        getColor(averageRating) {
+            const number = parseFloat(averageRating);
+            let color = 'gray';
+
+            if(number >= 9.5) {
+                color = '#63b3ed';
+            } else if(number >= 8.5) {
+                color = '#68d391';
+            } else if(number >= 7.5) {
+                color = '#f6e05e';
+            } else if(number >= 6.5) {
+                color = '#f6ad55';
+            } else if(number >= 5.5) {
+                color = '#f687b3';
+            } else if(number > 0) {
+                color = '#fc8181';
+            }
+
+            return color;
         },
     },
 }
