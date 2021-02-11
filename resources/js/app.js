@@ -43,4 +43,12 @@ const app = new Vue({
             modal: false,
         }
     },
+
+    mounted() {
+        const modal = document.getElementById('info-modal');
+
+        if(modal) {
+            modal.classList.remove('hidden');
+        }
+    },
 });

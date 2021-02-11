@@ -49,7 +49,7 @@
     </div>
 
     <!-- modal -->
-    <div v-if="modal" class="fixed z-10 inset-0 overflow-y-auto">
+    <div v-show="modal" id="info-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20">
             <div class="fixed inset-0 transition-opacity" @@click="modal = false">
                 <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
@@ -59,7 +59,7 @@
                 <div class="bg-gray-800 px-4 pb-5 pt-3">
                     <p class="text-right cursor-pointer" @click="modal = false">x</p>
                     <h3 class="text-lg leading-6 font-medium text-white text-left pb-5">
-                        Rankings
+                        Rating
                     </h3>
                     <div class="select-none text-sm leading-5 text-center border-gray-800 text-gray-800">
                         <p class="bg-blue-400 border">
