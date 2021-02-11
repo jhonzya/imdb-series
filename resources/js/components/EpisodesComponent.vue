@@ -20,7 +20,7 @@ export default {
     },
 
     props: {
-        api: {type: String, required: true},
+        id: {type: String, required: true},
     },
 
     data() {
@@ -63,7 +63,7 @@ export default {
     },
 
     created() {
-        axios.get(this.api).then(response => {
+        axios.get(`api/title/${this.id}/show`).then(response => {
             this.title = response.data.data;
         }).catch(e => {
             console.error(e);

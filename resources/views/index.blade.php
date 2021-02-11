@@ -13,8 +13,7 @@
                 </div>
             </div>
             <div class="flex flex-col py-2">
-                <search-component api="{{ route('search') }}">
-                </search-component>
+                <search-component></search-component>
             </div>
         </div>
     </div>
