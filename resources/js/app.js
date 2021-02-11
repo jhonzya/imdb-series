@@ -8,7 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import { LoaderIcon, SearchIcon, TvIcon } from "vue-feather-icons";
+import { InfoIcon, LoaderIcon, SearchIcon, TvIcon } from "vue-feather-icons";
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,6 +24,7 @@ import { LoaderIcon, SearchIcon, TvIcon } from "vue-feather-icons";
 Vue.component('search-component', require('./components/SearchComponent.vue').default);
 Vue.component('episodes-component', require('./components/EpisodesComponent.vue').default);
 
+Vue.component('info-icon', InfoIcon);
 Vue.component('loader-icon', LoaderIcon);
 Vue.component('search-icon', SearchIcon);
 Vue.component('tv-icon', TvIcon);
@@ -36,4 +37,10 @@ Vue.component('tv-icon', TvIcon);
 
 const app = new Vue({
     el: '#app',
+
+    data() {
+        return {
+            modal: false,
+        }
+    },
 });

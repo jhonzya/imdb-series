@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <!-- component -->
+        <!-- modal -->
         <div v-if="modal" class="fixed z-10 inset-0 overflow-y-auto">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20">
                 <div class="fixed inset-0 transition-opacity" @click="modal = false">
@@ -121,15 +121,15 @@ export default {
             const number = parseFloat(rating ? rating.averageRating : null);
             let color = 'gray';
 
-            if(number >= 10) {
+            if(number >= 9.5) {
                 color = 'blue';
-            } else if(number >= 9) {
+            } else if(number >= 8.5) {
                 color = 'green';
-            } else if(number >= 8) {
+            } else if(number >= 7.5) {
                 color = 'yellow';
-            } else if(number >= 7) {
+            } else if(number >= 6.5) {
                 color = 'orange';
-            } else if(number >= 6) {
+            } else if(number >= 5.5) {
                 color = 'pink';
             } else if(number > 0) {
                 color = 'red';
@@ -145,7 +145,7 @@ export default {
                 classes = classes.concat([
                     `hover:bg-${color}-500`,
                     `focus:bg-${color}-500`,
-                    `text-transparent`,
+                    `text-gray-800`,
                     `hover:text-gray-800`,
                     'cursor-pointer',
                 ]);
