@@ -112,6 +112,14 @@ export default {
             axios.get(`/api/episode/${episode.titleId}/show`).then(response => {
                 this.episode.detail = response.data.data;
                 this.modal = true;
+
+                plausible('show episode details', {
+                    props: {
+                        id: this.episode.titleId,
+                        primaryTitle: this.episode.detail.primaryTitle,
+                        link: this.episode.detail.link,
+                    }
+                });
             }).catch(e => {
                 console.error(e);
             })

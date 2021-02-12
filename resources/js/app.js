@@ -51,4 +51,10 @@ const app = new Vue({
             modal.classList.remove('hidden');
         }
     },
+
+    watch: {
+        modal(value) {
+            plausible(value ? 'Show info modal' : 'Close info modal');
+        }
+    },
 });
