@@ -54,7 +54,7 @@ const app = new Vue({
 
     watch: {
         modal(value) {
-            plausible(value ? 'Show info modal' : 'Close info modal');
+            plausible(value ? 'show info modal' : 'close info modal');
         }
     },
 });
