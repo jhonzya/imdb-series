@@ -93,6 +93,13 @@ export default {
                     params: {q},
                 }).then((response) => {
                     this.searching = false;
+
+                    plausible('searchs', {
+                        props: {
+                            query: q,
+                        }
+                    });
+
                     resolve(response.data.data);
                 }).catch(e => {
                     console.error(e);
@@ -102,6 +109,15 @@ export default {
 
         onSubmit(result) {
             this.searching = true;
+
+            plausible('click serie', {
+                props: {
+                    id: result.profile,
+                    primaryTitle: result.primaryTitle,
+                    link: result.link,
+                }
+            });
+
             window.open(result.profile, '_self');
         },
 
