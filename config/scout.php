@@ -11,7 +11,7 @@ return [
     | using Laravel Scout. This connection is used when syncing all models
     | to the search service. You should adjust this based on your needs.
     |
-    | Supported: "algolia", "null"
+    | Supported: "algolia", "meilisearch", "collection", "null"
     |
     */
 
@@ -116,17 +116,22 @@ return [
         'secret' => env('ALGOLIA_SECRET', ''),
     ],
 
-    'tntsearch' => [
-        'storage' => storage_path('app/search'), //place where the index files will be stored
-        'fuzziness' => env('TNTSEARCH_FUZZINESS', true),
-        'fuzzy' => [
-            'prefix_length' => 2,
-            'max_expansions' => 50,
-            'distance' => 2,
-        ],
-        'asYouType' => false,
-        'searchBoolean' => env('TNTSEARCH_BOOLEAN', false),
-        'maxDocs' => env('TNTSEARCH_MAX_DOCS', 500),
+    /*
+    |--------------------------------------------------------------------------
+    | MeiliSearch Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure your MeiliSearch settings. MeiliSearch is an open
+    | source search engine with minimal configuration. Below, you can state
+    | the host and key information for your own MeiliSearch installation.
+    |
+    | See: https://docs.meilisearch.com/guides/advanced_guides/configuration.html
+    |
+    */
+
+    'meilisearch' => [
+        'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
+        'key' => env('MEILISEARCH_KEY', null),
     ],
 
 ];
