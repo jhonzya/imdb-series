@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Title;
 use Illuminate\Console\Command;
 
 class ImdbDatabase extends Command
@@ -37,10 +38,13 @@ class ImdbDatabase extends Command
      */
     public function handle()
     {
+        $title = Title::class;
+
         $this->call('imdb:download');
         $this->call('imdb:unzip');
         $this->call('imdb:save');
         $this->call('imdb:clear');
+        $this->call("scout:import '$title'");
 
         return 0;
     }
