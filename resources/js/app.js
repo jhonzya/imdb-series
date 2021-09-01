@@ -33,10 +33,4 @@ const app = new Vue({
             modal.classList.remove('hidden');
         }
     },
-
-    watch: {
-        modal(value) {
-            plausible(value ? 'show info modal' : 'close info modal');
-        }
-    },
 });

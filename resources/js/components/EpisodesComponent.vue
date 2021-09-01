@@ -65,14 +65,6 @@ export default {
     created() {
         axios.get(`api/title/${this.id}/show`).then(response => {
             this.title = response.data.data;
-
-            plausible('load serie', {
-                props: {
-                    id: this.title.profile,
-                    primaryTitle: this.title.primaryTitle,
-                    link: this.title.link,
-                }
-            });
         }).catch(e => {
             console.error(e);
         })

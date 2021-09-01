@@ -32,9 +32,6 @@
         <meta name="twitter:description" content="@yield('description', config('app.description'))">
         <meta name="twitter:image" content="{{ asset('img/logo.png') }}">
         <meta name="twitter:image:alt" content="{{ config('app.name') }}">
-
-        <script async defer data-domain="tv-series.app" src="https://plausible.io/js/plausible.js"></script>
-        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     </head>
     <body class="flex flex-col h-screen justify-between font-fixed bg-gray-800 text-white">
         <div id="app" class="container mx-auto">
