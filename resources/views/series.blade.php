@@ -4,7 +4,7 @@
 @section('description', "{$title->type} {$title->startYear} - {$title->endYear}")
 
 @section('container')
-    <div class="flex bg-gray-800 border-b border-white fixed top-0 inset-x-0 z-100 h-16 items-center">
+    <div class="flex border-b border-white fixed top-0 inset-x-0 z-100 h-16 items-center">
         <div class="w-full max-w-screen-xl relative mx-auto px-6">
             <div class="flex items-center -mx-6">
                 <div class="pl-6 pr-6">
@@ -30,7 +30,7 @@
         <div class="flex">
             <div class="pt-20 lg:pt-28 w-full">
                 <div class="mb-6 px-6 mx-0">
-                    <h1 class="text-4xl title select-none">
+                    <h1 class="text-4xl select-none">
                         {{ $title->primaryTitle }}
                     </h1>
 

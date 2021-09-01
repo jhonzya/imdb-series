@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
     purge: [
         './storage/framework/views/*.php',
@@ -7,7 +9,7 @@ module.exports = {
     ],
     theme: {
         fontFamily: {
-            'fixed': ['"Fixedsys Excelsior 3.01"'],
+            'sans': ['"Open Sans"', ...defaultTheme.fontFamily.sans],
         },
         extend: {
             gridTemplateColumns: {

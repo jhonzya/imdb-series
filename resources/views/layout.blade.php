@@ -33,7 +33,7 @@
         <meta name="twitter:image" content="{{ asset('img/logo.png') }}">
         <meta name="twitter:image:alt" content="{{ config('app.name') }}">
     </head>
-    <body class="flex flex-col h-screen justify-between font-fixed bg-gray-800 text-white">
+    <body class="flex flex-col h-screen justify-between font-sans">
         <div id="app" class="container mx-auto">
             @yield('container')
         </div>

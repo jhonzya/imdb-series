@@ -1,15 +1,8 @@
+@import "fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@font-face {
-    font-family: "Fixedsys Excelsior 3.01";
-    src: url("//db.onlinewebfonts.com/t/13c63232af298878387142e0da62c96f.eot");
-    src: url("//db.onlinewebfonts.com/t/13c63232af298878387142e0da62c96f.eot?#iefix") format("embedded-opentype"),
-    url("//db.onlinewebfonts.com/t/13c63232af298878387142e0da62c96f.woff2") format("woff2"),
-    url("//db.onlinewebfonts.com/t/13c63232af298878387142e0da62c96f.woff") format("woff"),
-    url("//db.onlinewebfonts.com/t/13c63232af298878387142e0da62c96f.ttf") format("truetype"),
-    url("//db.onlinewebfonts.com/t/13c63232af298878387142e0da62c96f.svg#Fixedsys Excelsior 3.01") format("svg"); }
 
 .autocomplete-input {
     @apply w-full border-solid border-white border rounded-sm relative pl-3 pr-10 py-2 outline-none bg-gray-800;
@@ -25,8 +18,4 @@
 
 .autocomplete-result:hover {
     @apply bg-blue-700;
-}
-
-.title {
-    text-shadow: -0.06em 0 red, 0.06em 0 cyan;
 }

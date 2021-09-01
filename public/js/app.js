@@ -2679,13 +2679,6 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("api/title/".concat(this.id, "/show")).then(function (response) {
       _this.title = response.data.data;
-      plausible('load serie', {
-        props: {
-          id: _this.title.profile,
-          primaryTitle: _this.title.primaryTitle,
-          link: _this.title.link
-        }
-      });
     })["catch"](function (e) {
       console.error(e);
     });
@@ -2801,11 +2794,6 @@ __webpack_require__.r(__webpack_exports__);
           }
         }).then(function (response) {
           _this.searching = false;
-          plausible('searchs', {
-            props: {
-              query: q
-            }
-          });
           resolve(response.data.data);
         })["catch"](function (e) {
           console.error(e);
@@ -2814,13 +2802,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     onSubmit: function onSubmit(result) {
       this.searching = true;
-      plausible('click serie', {
-        props: {
-          id: result.profile,
-          primaryTitle: result.primaryTitle,
-          link: result.link
-        }
-      });
       window.open(result.profile, '_self');
     },
     handleFocus: function handleFocus() {
@@ -2958,13 +2939,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/episode/".concat(episode.titleId, "/show")).then(function (response) {
         _this.episode.detail = response.data.data;
         _this.modal = true;
-        plausible('show episode details', {
-          props: {
-            id: _this.episode.titleId,
-            primaryTitle: _this.episode.detail.primaryTitle,
-            link: _this.episode.detail.link
-          }
-        });
       })["catch"](function (e) {
         console.error(e);
       });
@@ -3040,11 +3014,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
 
     if (modal) {
       modal.classList.remove('hidden');
-    }
-  },
-  watch: {
-    modal: function modal(value) {
-      plausible(value ? 'show info modal' : 'close info modal');
     }
   }
 });
